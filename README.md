@@ -4,8 +4,8 @@ Run the preprocessing script like so:
 ```
 python visdial_embed.py <path to visdial.json> <path to visdial image root>
 ```
-If you do not already have the visdial jsons and images, you can download them using the visdial-diversity script:
-INSERT LINK HERE, k thx bye
+If you do not already have the visdial jsons and images, you can download them using the visdial repo's script:
+https://github.com/tbd-clip/visdial/blob/master/scripts/download_images_and_json.sh
 
 # CLIP
 
