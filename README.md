@@ -1,4 +1,11 @@
-# Preprocessing VisDial Images using Resnet50 + Attn Backbone
+## Preprocessing VisDial Images using Resnet50 + Attn Backbone
+
+Run the preprocessing script like so:
+```
+python visdial_embed.py <path to visdial.json> <path to visdial image root>
+```
+If you do not already have the visdial jsons and images, you can download them using the visdial-diversity script:
+INSERT LINK HERE, k thx bye
 
 # CLIP
 
