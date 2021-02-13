@@ -9,11 +9,9 @@ import sys
 from PIL import Image
 import numpy as np
 
-def create_and_save(clip_model, clip_preprocess, json_path, image_root):
+def create_and_save(clip_model, clip_preprocess, image_paths, image_root):
 
     embed_size = 512
-    print('Reading json...')
-    json_data = json.load(open(json_path, 'r'))
 
     def get_embeds(json_data):
         image_embeds = np.zeros((len(json_data), embed_size), dtype=np.float32)
@@ -28,9 +26,9 @@ def create_and_save(clip_model, clip_preprocess, json_path, image_root):
 
         return image_embeds
 
-    train_embeds = get_embeds(json_data['unique_img_train'])
-    val_embeds = get_embeds(json_data['unique_img_val'])
-    test_embeds = get_embeds(json_data['unique_img_test'])
+    train_embeds = get_embeds(image_paths['unique_img_train'])
+    val_embeds = get_embeds(image_paths['unique_img_val'])
+    test_embeds = get_embeds(image_paths['unique_img_test'])
 
     output_h5 = "./data_img.h5"
     print('Saving hdf5 to %s...' % output_h5)
@@ -48,4 +46,7 @@ if __name__ == "__main__":
     device = "cuda" if torch.cuda.is_available() else "cpu"
     clip_model, clip_preprocess = clip.load("ViT-B/32", device=device)
 
-    create_and_save(sys.argv[1], sys.argv[2])
+    image_paths_json, image_root = sys.argv[1], sys.argv[2]
+    image_paths = json.load(open(image_paths_json, 'r')) # read json file
+
+    create_and_save(clip_model, clip_preprocess, image_paths, image_root)
